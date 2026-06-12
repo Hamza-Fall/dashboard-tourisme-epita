@@ -1,6 +1,6 @@
 # =============================================================================
 # EPITA - EXAMEN FINAL MPE + AED
-# Application Streamlit Multi-Vues : Version Design Épuré (Zéro code HTML instable)
+# Application Streamlit Multi-Vues : Version Design Épuré (Sans émojis)
 # Fichier : apps.py
 # =============================================================================
 
@@ -11,7 +11,7 @@ import plotly.express as px
 
 # 1. Configuration moderne de la page
 st.set_page_config(
-    page_title="EPITA - Gouvernance & IA",
+    page_title="EPITA - Gouvernance et IA",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -24,7 +24,7 @@ def load_pipeline_data():
         top5_df = pd.read_csv("top5_destinations_recommandees.csv")
         return gold_df, top5_df
     except FileNotFoundError:
-        st.error("⚠️ Fichiers de données introuvables. Veuillez vérifier que 'gold_data.csv' et 'top5_destinations_recommandees.csv' sont à la racine de votre dépôt GitHub.")
+        st.error("Fichiers de données introuvables. Veuillez vérifier que 'gold_data.csv' et 'top5_destinations_recommandees.csv' sont à la racine de votre dépôt GitHub.")
         return None, None
 
 gold, top5 = load_pipeline_data()
@@ -32,19 +32,19 @@ gold, top5 = load_pipeline_data()
 # 3. Design de la barre latérale (Sidebar)
 with st.sidebar:
     st.image("https://www.epita.fr/wp-content/themes/epita/images/logo.svg", width=140)
-    st.markdown("### 🎓 Option Majeure")
-    st.caption("**Candidat EPITA : Data Governance & IA Expert**")
+    st.markdown("### Option Majeure")
+    st.caption("Candidat EPITA : Data Governance et IA Expert")
     st.markdown("---")
     
     # Navigation par boutons radio pour un parcours fluide
     page = st.radio(
         "Sélectionner la section du barème :", 
         [
-            "📈 Executive View", 
-            "🛡️ Data Quality & Signaux", 
-            "🤖 IA Performance & Forecast", 
-            "🎯 Arbitrage Business", 
-            "⚖️ Gouvernance & Question Ultime"
+            "Executive View", 
+            "Data Quality et Signaux", 
+            "IA Performance et Forecast", 
+            "Arbitrage Business", 
+            "Gouvernance et Question Ultime"
         ]
     )
 
@@ -52,10 +52,10 @@ with st.sidebar:
 if gold is not None and top5 is not None:
 
     # =============================================================================
-    # VUE 1 : EXECUTIVE VIEW (Design épuré par cartes métriques)
+    # VUE 1 : EXECUTIVE VIEW
     # =============================================================================
-    if page == "📈 Executive View":
-        st.title("📈 Executive View")
+    if page == "Executive View":
+        st.title("Executive View")
         st.caption("Pilotage stratégique de la demande touristique et allocation budgétaire.")
         
         # Organisation en conteneur de cartes (Design épuré natif)
@@ -68,7 +68,7 @@ if gold is not None and top5 is not None:
         
         st.markdown("---")
         
-        # Utilisation de thèmes colorés natifs Plotly (Ex: 'plotly_white' ou 'seaborn')
+        # Utilisation de thèmes colorés natifs Plotly
         st.subheader("Distribution et Dispersion du ROI par Marché")
         fig_roi = px.box(
             gold, 
@@ -82,14 +82,14 @@ if gold is not None and top5 is not None:
         st.plotly_chart(fig_roi, use_container_width=True)
 
     # =============================================================================
-    # VUE 2 : DATA QUALITY & SIGNAUX FAIBLES
+    # VUE 2 : DATA QUALITY ET SIGNAUX FAIBLES
     # =============================================================================
-    elif page == "🛡️ Data Quality & Signaux":
-        st.title("🛡️ Data Quality & Signaux Faibles")
+    elif page == "Data Quality et Signaux":
+        st.title("Data Quality et Signaux Faibles")
         st.caption("Auditabilité des traitements de données et détection d'opportunités d'arbitrage.")
         
-        # Message d'alerte design
-        st.info("💡 **Signal Faible Détecté :** Les bulles volumineuses situées en bas à droite représentent des destinations possédant une forte attractivité théorique mais un déficit critique de voyageurs. C'est notre levier de croissance prioritaire.")
+        # Message d'information
+        st.info("Signal Faible Détecté : Les bulles volumineuses situées en bas à droite représentent des destinations possédant une forte attractivité théorique mais un déficit critique de voyageurs. C'est notre levier de croissance prioritaire.")
         
         fig_anom = px.scatter(
             gold, 
@@ -110,17 +110,17 @@ if gold is not None and top5 is not None:
         st.subheader("Rapport de Certification du Pipeline de Données (QA)")
         col_qa1, col_qa2 = st.columns(2)
         with col_qa1:
-            st.success("✔️ **Standardisation de la casse :** Nettoyage des chaînes textuelles en `Title Case` (Ex: 'France') pour garantir l'intégrité référentielle lors des jointures.")
-            st.success("✔️ **Dédoublonnage :** Purge des clés redondantes au sein des sources brutes (JSON, CSV, XLSX).")
+            st.success("Standardisation de la casse : Nettoyage des chaînes textuelles en Title Case (Ex: 'France') pour garantir l'intégrité référentielle lors des jointures.")
+            st.success("Dédoublonnage : Purge des clés redondantes au sein des sources brutes (JSON, CSV, XLSX).")
         with col_qa2:
-            st.success("✔️ **Alignement temporel :** Parsing des formats de dates composites (`YYYY-MM` et `YYYY/MM`) vers un format datetime unifié.")
-            st.success("✔️ **Imputation contrôlée :** Conversion des mentions textuelles 'unknown' en valeurs manquantes réelles, substituées par la médiane.")
+            st.success("Alignement temporel : Parsing des formats de dates composites (YYYY-MM et YYYY/MM) vers un format datetime unifié.")
+            st.success("Imputation contrôlée : Conversion des mentions textuelles 'unknown' en valeurs manquantes réelles, substituées par la médiane.")
 
     # =============================================================================
-    # VUE 3 : IA PERFORMANCE & FORECAST (Séries Temporelles)
+    # VUE 3 : IA PERFORMANCE ET FORECAST (Séries Temporelles)
     # =============================================================================
-    elif page == "🤖 IA Performance & Forecast":
-        st.title("🤖 IA Performance & Forecast")
+    elif page == "IA Performance et Forecast":
+        st.title("IA Performance et Forecast")
         st.caption("Validation mathématique et rigueur statistique des prévisions.")
         
         # Données de validation des modèles ordonnées
@@ -137,7 +137,7 @@ if gold is not None and top5 is not None:
         metrics_df = pd.DataFrame(metrics_data)
         
         st.subheader("Tableau Comparatif d'Évaluation de la Demande")
-        # Affichage du tableau de scores au design épuré, mettant en valeur le meilleur score (le plus bas)
+        # Affichage du tableau de scores mettant en valeur le meilleur score (le plus bas)
         st.dataframe(
             metrics_df.style.highlight_min(axis=0, subset=["MAE (Mean Absolute Error)", "RMSE (Root Mean Squared Error)"], color="#DEF7EC"),
             use_container_width=True,
@@ -146,13 +146,13 @@ if gold is not None and top5 is not None:
         
         st.markdown("---")
         st.subheader("Protocole Anti-Data Leakage")
-        st.warning("⚠️ **Gouvernance de l'apprentissage :** Aucun échantillonnage aléatoire n'a été appliqué. Un fractionnement temporel chronologique strict (`TimeSeriesSplit`) a été implémenté pour empêcher toute contamination des données passées par des informations futures.")
+        st.warning("Gouvernance de l'apprentissage : Aucun échantillonnage aléatoire n'a été appliqué. Un fractionnement temporel chronologique strict (TimeSeriesSplit) a été implémenté pour empêcher toute contamination des données passées par des informations futures.")
 
     # =============================================================================
     # VUE 4 : ARBITRAGE BUSINESS (Top 5 Recommandations)
     # =============================================================================
-    elif page == "🎯 Arbitrage Business":
-        st.title("🎯 Arbitrage Business")
+    elif page == "Arbitrage Business":
+        st.title("Arbitrage Business")
         st.caption("Recommandations prescriptives issues du modèle de notation composite.")
         
         # Sélection simplifiée du pays
@@ -186,13 +186,13 @@ if gold is not None and top5 is not None:
             st.plotly_chart(fig_reco, use_container_width=True)
 
     # =============================================================================
-    # VUE 5 : GOUVERNANCE & QUESTION ULTIME
+    # VUE 5 : GOUVERNANCE ET QUESTION ULTIME
     # =============================================================================
-    elif page == "⚖️ Gouvernance & Question Ultime":
-        st.title("⚖️ Gouvernance & Question Ultime")
+    elif page == "Gouvernance et Question Ultime":
+        st.title("Gouvernance et Question Ultime")
         
-        # Organisation moderne en onglets (Tabs) pour segmenter la gouvernance
-        tab_dict, tab_llm = st.tabs(["📋 Dictionnaire de Données", "❓ Pourquoi un LLM seul échoue ?"])
+        # Organisation moderne en onglets (Tabs)
+        tab_dict, tab_llm = st.tabs(["Dictionnaire de Données", "Pourquoi un LLM seul échoue ?"])
         
         with tab_dict:
             st.subheader("Métadonnées et Règles Qualité des Indicateurs Dérivés")
@@ -218,7 +218,7 @@ if gold is not None and top5 is not None:
         with tab_llm:
             st.subheader("La Réponse Analytique face aux Limites de l'IA Générative")
             
-            st.error("❌ **Pourquoi une approche purement basée sur un LLM seul serait insuffisante et dangereuse ?**")
+            st.error("Pourquoi une approche purement basée sur un LLM seul serait insuffisante et dangereuse ?")
             
             st.markdown("""
             1. **Absence de garanties mathématiques :** Un LLM est un moteur probabiliste de prédiction linguistique (génération de mots). Il est incapable de modéliser des dynamiques de séries temporelles quantitatives ou de garantir des métriques strictes de minimisation d'erreurs d'ajustement ($MAE$, $RMSE$).
